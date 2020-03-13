@@ -67,6 +67,19 @@ To import this module:
 	</data>
 </object>
 <object>
+	<name>ListOfValue</name>
+	<action>upsert</action>
+	<data>
+		<lov_name>TEXT</lov_name>
+		<lov_code>DEMO_WEBSITE</lov_code>
+		<lov_lang>ANY</lov_lang>
+		<lov_value><![CDATA[Website]]></lov_value>
+		<lov_order_by>1</lov_order_by>
+		<lov_event_id.lev_code/>
+		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
+	</data>
+</object>
+<object>
 	<name>ObjectExternal</name>
 	<action>upsert</action>
 	<data>
@@ -172,7 +185,7 @@ To import this module:
 		<res_cached>0</res_cached>
 		<res_file/>
 		<res_file_compiled/>
-		<res_image>resources/ObjectExternal/DemoWebSite/FAVICON.ico</res_image>
+		<res_image>resources/ObjectExternal/DemoWebSite/FAVICON.png</res_image>
 		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
 	</data>
 	<data>
