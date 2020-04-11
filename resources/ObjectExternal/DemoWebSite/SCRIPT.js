@@ -174,13 +174,13 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 		page = "catalog";
 		prd.search(function() {
 			$main.empty();
-			var r;
+			var r = row();
 			for (var i = 0; i < prd.list.length; i++) {
-				var item = prd.list[i];
-				if (i % 4 === 0) {
-					if (r !== undefined) $main.append(r);
+				if (i !== 0 && i % 4 === 0) {
+					$main.append(r);
 					r = row();
 				}
+				var item = prd.list[i];
 				var pt = item.demoPrdSupId__demoSupName + " / " + item.demoPrdName;
 				//var pi = $("<img/>", { style: "height: 200px;", title: item.demoPrdReference, src: "data:" + item.demoPrdPicture.mime + ";base64," + item.demoPrdPicture.content }).popover({ content: item.demoPrdDescription });
 				var pi = $("<img/>", { style: "height: 150px;", title: item.demoPrdReference, src: app.imageURL(prd.getName(), "demoPrdPicture", item.row_id, item.demoPrdPicture, false) }).popover({ content: item.demoPrdDescription });
