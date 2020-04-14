@@ -14,7 +14,9 @@
 	}
 }]]></mdl_url>
 		<mdl_lastupd>2020-03-09 22:49:15</mdl_lastupd>
-		<mdl_comment><![CDATA[### Introduction
+		<mdl_comment><![CDATA[[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.simplicite.modules%3ADemoWebSite&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.simplicite.modules%3ADemoWebSite)
+
+### Introduction
 
 This module contains a simple website example for the demo **order management** application.
 
