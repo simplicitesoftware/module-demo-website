@@ -1,19 +1,19 @@
 var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWebSiteBootstrap : (function($) {
 	var app, prd, cli, ord, ctc;
 	var $loading, $main, $info, $warning, $error, $popup;
-	
+
 	var page;
-	
+
 	function info(msg) { $info.html(msg).slideDown(); }
 	function warning(msg) { $warning.html(msg).slideDown(); }
 	function error(err) { $error.html(app.getErrorMessage(err)).slideDown(); }
-	
+
 	function amount(v) { return parseFloat(v).toFixed(2) + " &euro;"; }
 	function date(d) { return new Date(Date.parse(d)).toDateString(); }
 
 	function init(loading) {
 		$loading = $("<img/>", { src: loading });
-		
+
 		$("#menu-brand").click(function() { catalog(); });
 		$("#menu-catalog").click(function() { catalog(); });
 		$("#menu-orders").click(function() { orders(); });
@@ -25,7 +25,7 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 		$info = $("#info");
 		$warning = $("#warning");
 		$error = $("#error");
-		
+
 		var t = $("<h4/>").addClass("modal_title");
 		var b = $("<div/>").addClass("modal-body");
 		var ok = $("<button/>", { type: "button" }).addClass("btn").addClass("btn-primary").attr("data-dismiss", "modal").attr("aria-hidden", true).append("OK");
@@ -45,22 +45,15 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 		$("body").append(p);
 		$popup = { title: t, body: b, ok: ok, show: function() { p.modal("show"); }, hide: function() { p.modal("hide"); } };
 
-		// Using current authenticated user thru UI gateway
-		//app = new Simplicite.Ajax(ROOT);
-		// Using public user thru public UI gateway
-		//app = new Simplicite.Ajax(ROOT, "uipublic");
-		// Using website user thru API gateway (website user has default password, change it here if you change it at user level)
 		app = new Simplicite.Ajax(ROOT, "api", "website", "simplicite");
 
 		app.setInfoHandler(info);
 		app.setWarningHandler(warning);
 		app.setErrorHandler(error);
-		//app.setDebugHandlerActive(true);
-		//app.setTimeout(5000);
-		
+
 		session();
 	}
-	
+
 	function session() {
 		var token = localStorage ? localStorage.getItem("authtoken") : undefined;
 		if (token) console.log("Try to reuse auth token: " + token);
@@ -106,7 +99,7 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 				ctc.item.demoCtcComments = "<p>Message from the customer:<blockquote>" + $("#message").val() + "</blockquote></p>&nbsp;";
 				if (orderItem !== undefined)
 					ctc.item.demoCtcOrdId = orderItem.row_id;
-	
+
 				ctc.create(function() {
 					$popup.hide();
 					info("Your message has been sent !");
@@ -147,11 +140,11 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 		})))).fadeIn();
 		$("#demoCliCode").focus();
 	}
-	
+
 	function row() {
 		return $("<div/>").addClass("row");
 	}
-	
+
 	function panel(body, heading, style, span) {
 		var p = $("<div/>").addClass("panel").addClass("panel-" + (style === undefined ? "default" : style));
 		if (heading !== undefined)
@@ -191,25 +184,25 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 			if (r !== undefined) $main.append(r);
 		}/*, undefined, /*{ inlineDocs: true }*/);
 	}
-	
+
 	function formElement(id, label, content) {
 		var fg =$("<div/>").addClass("form-group");
 		fg.append($("<label/>").attr("for", id).addClass("col-md-3").addClass("control-label").append(label === undefined ? "" : label));
 		fg.append($("<div/>").addClass("col-md-9").append(content));
 		return fg;
 	}
-	
+
 	function input(id, value, placeholder, change) {
 		var i = $("<input/>", { id: id, type: "text", placeholder: placeholder }).addClass("form-control").val(value === undefined ? "" : value);
 		if (change !== undefined)
 			i.change(function() { change(i); });
 		return i;
 	}
-	
+
 	function formInput(id, label, value, change) {
 		return formElement(id, label, input(id, value, undefined, change));
 	}
-	
+
 	function order() {
 		reset(true);
 		page = "order";
@@ -254,7 +247,7 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 		$main.empty().append(panel(r, "Place an order"));
 		$(cli.item === undefined ? "#demoCliCode" : "#quantity").select().focus();
 	}
-	
+
 	function orders() {
 		function message_click() {
 			contact($(this).data("item"));
@@ -349,7 +342,7 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 			}, { demoCtcCliId: cli.item.row_id, demoCtcCanal: "WEB" }, { page: 0 });
 		}
 	}
-	
+
 	function agenda() {
 		reset(true);
 		page = "agenda";
