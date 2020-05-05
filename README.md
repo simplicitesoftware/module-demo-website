@@ -11,7 +11,7 @@
 `DemoWebSite` module definition
 ===============================
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.simplicite.modules%3ADemoWebSite&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.simplicite.modules%3ADemoWebSite)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=simplicite-modules-DemoProject&metric=alert_status)](https://sonarcloud.io/dashboard?id=simplicite-modules-DemoProject)
 
 ### Introduction
 
