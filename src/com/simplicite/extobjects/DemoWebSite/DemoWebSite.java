@@ -25,11 +25,7 @@ public class DemoWebSite extends ExternalObject {
 			setDecoration(false);
 
 			// Bootstrap page
-			boolean dark = params.getBooleanParameter("dark");
-			BootstrapWebPage wp = new BootstrapWebPage(params.getRoot(), getDisplay(), dark ? "dark" : null);
-			if (dark)
-				wp.appendCSS(".navbar-inverse { background-color: #464545; } .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus { color: #A0A0A0; }");
-
+			BootstrapWebPage wp = new BootstrapWebPage(params.getRoot(), getDisplay());
 			wp.appendJS("var ROOT = \"" + wp.getRoot() + "\";");
 			wp.appendAjax();
 			wp.appendFullcalendar();
