@@ -37,21 +37,18 @@ public class DemoWebSite extends ExternalObject {
 			wp.append("<button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#menu\">");
 			wp.append("<span class=\"navbar-toggler-icon\"></span>");
 			wp.append("</button>");
-			wp.append("<div class=\"collapse navbar-collapse\" id=\"menu\">");
-			wp.append("<div class=\"navbar-nav\">");
+			wp.append("<div class=\"collapse navbar-collapse\" id=\"menu\"><div class=\"navbar-nav\">");
 			wp.append("<a class=\"nav-item nav-link\" id=\"menu-catalog\" href=\"#\">Catalog</a>");
 			wp.append("<a class=\"nav-item nav-link disabled\" id=\"menu-orders\" href=\"#\">My orders</a>");
 			wp.append("<a class=\"nav-item nav-link disabled\" id=\"menu-messages\" href=\"#\">My messages</a>");
-			wp.append("</div>");
-			wp.append("</div>");
+			wp.append("</div></div>");
 			wp.append("</nav>");
-
-			wp.appendHTML("<div id=\"header\" class=\"alert alert-primary\" style=\"margin: 4px; display: none;\"></div>");
-			wp.appendHTML("<div id=\"info\" class=\"alert alert-success\" style=\"margin: 4px; display: none;\"></div>");
-			wp.appendHTML("<div id=\"warning\" class=\"alert alert-warning\" style=\"margin: 4px; display: none;\"></div>");
-			wp.appendHTML("<div id=\"error\" class=\"alert alert-danger\" style=\"margin: 4px;display: none;\"></div>");
-			wp.appendHTML("<div id=\"main\"></div>");
-			wp.appendHTML("<div id=\"footer\">&copy; Simplicit&eacute; Software</div>");
+			wp.append("<div id=\"header\" class=\"alert alert-primary\" style=\"margin: 4px; display: none;\"></div>");
+			wp.append("<div id=\"info\" class=\"alert alert-success\" style=\"margin: 4px; display: none;\"></div>");
+			wp.append("<div id=\"warning\" class=\"alert alert-warning\" style=\"margin: 4px; display: none;\"></div>");
+			wp.append("<div id=\"error\" class=\"alert alert-danger\" style=\"margin: 4px;display: none;\"></div>");
+			wp.append("<div id=\"main\"></div>");
+			wp.append("<div id=\"footer\">&copy; Simplicit&eacute; Software</div>");
 
 			return wp.toString();
 		} catch (Exception e) {
