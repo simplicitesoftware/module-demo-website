@@ -29,7 +29,6 @@ public class DemoWebSite extends ExternalObject {
 
 			wp.appendJS("var ROOT = \"" + wp.getRoot() + "\";");
 			wp.appendAjax();
-			//wp.appendFullcalendar();
 			wp.appendJSInclude(HTMLTool.getResourceJSURL(this, "SCRIPT"));
 			wp.setFavicon(HTMLTool.getResourceIconURL(this, "FAVICON"));
 			wp.setReady("DemoWebSiteBootstrap.init(\"" + HTMLTool.getResourceImageURL(this, "LOADING") + "\");");
@@ -45,7 +44,6 @@ public class DemoWebSite extends ExternalObject {
 			wp.append("<a class=\"nav-item nav-link\" id=\"menu-catalog\" href=\"#\">Catalog</a>");
 			wp.append("<a class=\"nav-item nav-link disabled\" id=\"menu-orders\" href=\"#\">My orders</a>");
 			wp.append("<a class=\"nav-item nav-link disabled\" id=\"menu-messages\" href=\"#\">My messages</a>");
-			//wp.append("<a class=\"nav-item nav-link\" id=\"menu-agenda\" href=\"#\">My delivery agenda</a>");
 			wp.append("</div>");
 			wp.append("</div>");
 			wp.append("</nav>");

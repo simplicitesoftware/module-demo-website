@@ -18,7 +18,6 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 		$("#menu-catalog").click(function() { catalog(); });
 		$("#menu-orders").click(function() { orders(); });
 		$("#menu-messages").click(function() { messages(); });
-		$("#menu-agenda").click(function() { agenda(); });
 
 		$main = $("#main").html($loading);
 		$info = $("#info");
@@ -27,7 +26,7 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 
 		var t = $("<h4/>").addClass("modal_title");
 		var b = $("<div/>").addClass("modal-body");
-		var ok = $("<button/>", { type: "button" }).addClass("btn").addClass("btn-primary").attr("data-dismiss", "modal").attr("aria-hidden", true).append("OK");
+		var ok = $("<button/>", { type: "button" }).addClass("btn").addClass("btn-primary").attr("data-dismiss", "modal").append("OK");
 		var p = $("<div/>").addClass("modal").addClass("fade").attr("tabindex", -1).attr("role", "dialog").attr("aria-hidden", true).append(
 			$("<div/>").addClass("modal-dialog").append(
 				$("<div/>").addClass("modal-content").append(
@@ -125,7 +124,6 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 							}));
 					$("#menu-orders").removeClass("disabled");
 					$("#menu-messages").removeClass("disabled");
-					$//("#menu-agenda").removeClass("disabled");
 					if (page === "order")
 						$("#button-order").attr("disabled", false);
 					else if (page === "orders")
@@ -189,8 +187,9 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 
 	function formElement(id, label, content) {
 		var fg =$("<div/>").addClass("form-group");
-		fg.append($("<label/>").attr("for", id).addClass("col-md-3").addClass("control-label").append(label === undefined ? "" : label));
-		fg.append($("<div/>").addClass("col-md-9").append(content));
+		if (label)
+			fg.append($("<label/>").attr("for", id).append(label));
+		fg.append($("<div/>").append(content));
 		return fg;
 	}
 
@@ -208,7 +207,7 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 	function order() {
 		reset(true);
 		page = "order";
-		var f = $("<div/>");
+		var f = $("<form/>");
 		var bo = $("<button/>", { id: "button-order" }).addClass("btn").addClass("btn-success").text("Order").attr("disabled", cli.item === undefined).click(function() {
 			reset(false);
 			ord.getForCreate(function() {
@@ -232,8 +231,8 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 			});
 		});
 		var bc = $("<button/>", { id: "button-cancel" }).addClass("btn").addClass("btn-danger").text("Cancel").click(function() { catalog(); });
-		f.append(row().append(formInput("quantity", "Quantity", 1)));
-		f.append(row().append(formElement("buttons", "&nbsp;", $("<div/>", { style: "text-align: center; padding: 10px;" }).append(bo).append("&nbsp;").append(bc))));
+		f.append(formInput("quantity", "Quantity", 1));
+		f.append(formElement("buttons", undefined, $("<div/>", { style: "text-align: center; padding: 10px;" }).append(bo).append("&nbsp;").append(bc)));
 		var r = row();
 		r.append($("<div/>").addClass("col-md-4")
 				//.append($("<img/>", { src: "data:" + prd.item.demoPrdPicture.mime + ";base64," + prd.item.demoPrdPicture.content })).append("<br/>")
@@ -343,59 +342,6 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 				}
 			}, { demoCtcCliId: cli.item.row_id, demoCtcCanal: "WEB" }, { page: 0 });
 		}
-	}
-
-	function agenda() {
-		reset(true);
-		page = "agenda";
-		$main.empty();
-		if (cli.item === undefined) return;
-		var agd = $("<div/>", { id: "agenda", style: "margin-top: 10px;" });
-		$main.append(agd);
-		agd.fullCalendar({
-			header: {
-				left: "prev,next today",
-				center: "title",
-				right: "month,agendaWeek,agendaDay"
-			},
-			defaultView: "agendaWeek",
-			timezone: "local",
-			editable: false,
-			minTime: "06:00:00",
-			maxTime: "22:00:00",
-			eventClick: function(e) {
-				$popup.title.empty().append(e.title);
-				var ordId = e.id;
-				$popup.body.empty().append($("<p/>").html("TODO: get order for row ID = " + ordId));
-				$popup.ok.click(function() { return undefined; });
-				$popup.show();
-			},
-			events: function(start, end, tz, callback) {
-				var f = "YYYY-MM-DD HH:mm:ss";
-				var dmin = start.format(f);
-				var dmax = end.format(f);
-				console.debug("calendar view = " + dmin + " to " + dmax);
-				ord.search(function() {
-					console.debug(ord.list.length + " orders found between " + dmin + " and " + dmax);
-					var evts = [];
-					for (var i = 0; i < ord.list.length; i++) {
-						var o = ord.list[i];
-						if (o.demoOrdDeliveryDate !== "") { // When using intervals empty values are included !
-							evts.push({
-								id: o.row_id,
-								title: "Number " + o.demoOrdNumber + "\n(" + o.demoOrdQuantity + " " + o.demoOrdPrdId__demoPrdReference + ")",
-								start: moment(o.demoOrdDeliveryDate),
-								className: o.demoOrdStatus == "D" ? "btn-success" : (o.demoOrdStatus == "V" ? "btn-warning" : "btn-danger"),
-								borderColor: "lightgray",
-								data: o
-							});
-						}
-					}
-					console.debug(evts.length + " orders displayed between " + dmin + " and " + dmax);
-					callback(evts);
-				}, { demoOrdCliId: cli.item.row_id, dmin__demoOrdDeliveryDate: dmin, dmax__demoOrdDeliveryDate: dmax, demoOrdStatus: "P;V;D" }, { inlineDocs: false });
-			}
-		});
 	}
 
 	return { init: init };
