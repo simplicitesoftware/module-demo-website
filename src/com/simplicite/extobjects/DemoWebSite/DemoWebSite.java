@@ -1,7 +1,5 @@
 package com.simplicite.extobjects.DemoWebSite;
 
-import java.util.LinkedHashMap;
-
 import com.simplicite.util.AppLog;
 import com.simplicite.util.ExternalObject;
 import com.simplicite.util.tools.HTMLTool;
@@ -37,7 +35,7 @@ public class DemoWebSite extends ExternalObject {
 			wp.append("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\" style=\"margin: 0 4px 8px 4px;\">");
 			wp.append("<a class=\"navbar-brand\" id=\"menu-logo\" href=\"#\">" + logo + "</a>");
 			wp.append("<button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#menu\">");
-    		wp.append("<span class=\"navbar-toggler-icon\"></span>");
+			wp.append("<span class=\"navbar-toggler-icon\"></span>");
 			wp.append("</button>");
 			wp.append("<div class=\"collapse navbar-collapse\" id=\"menu\">");
 			wp.append("<div class=\"navbar-nav\">");
