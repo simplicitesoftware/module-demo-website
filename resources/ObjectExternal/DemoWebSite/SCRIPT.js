@@ -14,13 +14,12 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 	function init(loading) {
 		$loading = $("<img/>", { src: loading });
 
-		$("#menu-brand").click(function() { catalog(); });
+		$("#menu-logo").click(function() { catalog(); });
 		$("#menu-catalog").click(function() { catalog(); });
 		$("#menu-orders").click(function() { orders(); });
 		$("#menu-messages").click(function() { messages(); });
 		$("#menu-agenda").click(function() { agenda(); });
-		$("#menu-news").click(function() { news(); });
-		
+
 		$main = $("#main").html($loading);
 		$info = $("#info");
 		$warning = $("#warning");
@@ -124,6 +123,9 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 								if (page != "news") catalog();
 								client();
 							}));
+					$("#menu-orders").removeClass("disabled");
+					$("#menu-messages").removeClass("disabled");
+					$//("#menu-agenda").removeClass("disabled");
 					if (page === "order")
 						$("#button-order").attr("disabled", false);
 					else if (page === "orders")
@@ -145,14 +147,14 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 		return $("<div/>").addClass("row");
 	}
 
-	function panel(body, heading, style, span) {
-		var p = $("<div/>").addClass("panel").addClass("panel-" + (style === undefined ? "default" : style));
-		if (heading !== undefined)
-			p.append($("<div/>").addClass("panel-heading").append($("<h3/>").addClass("panel-title").append(heading)));
+	function card(body, heading, style, span) {
+		var p = $("<div style=\"margin: 4px;\"/>").addClass("card").addClass("bg-" + (style === undefined ? "default" : style));
+		if (heading)
+			p.append($("<div/>").addClass("card-header").append($("<div/>").addClass("card-title text-center").append(heading)));
 		if (body.is("table"))
 			return p.append(body);
 		else
-			p.append($("<div/>").addClass("panel-body").append(body));
+			p.append($("<div/>").addClass("card-body").append(body));
 		if (span !== undefined)
 			return $("<div/>").addClass("col-md-" + span).append(p);
 		return p;
@@ -179,7 +181,7 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 				var pi = $("<img/>", { style: "height: 150px;", title: item.demoPrdReference, src: app.imageURL(prd.getName(), "demoPrdPicture", item.row_id, item.demoPrdPicture, false) }).popover({ content: item.demoPrdDescription });
 				var pp = $("<strong/>", { style: "margin-right: 25px;" }).append(amount(item.demoPrdUnitPrice));
 				var b = $("<button/>").addClass("btn").addClass("btn-success").text("Order").data("item", item).click(order_click);
-				r.append(panel($("<div/>").addClass("text-center").append(pi).append("<hr/>").append($("<p/>").addClass("text-right").append(pp).append(b)), pt, "default", 3));
+				r.append(card($("<div/>").addClass("text-center").append(pi).append("<hr/>").append($("<p/>").addClass("text-right").append(pp).append(b)), pt, "default", 3));
 			}
 			if (r !== undefined) $main.append(r);
 		}/*, undefined, /*{ inlineDocs: true }*/);
@@ -244,7 +246,7 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 				.append($("<h3/>").text("Detailed description"))
 				.append(prd.item.demoPrdDocumentation)
 				.append(prd.item.demoPrdBrochure ? $("<p/>").append($("<a/>", { href: app.documentURL(prd.metadata.name, "demoPrdBrochure", prd.item.row_id, prd.item.demoPrdBrochure, "attachment") }).append("Download brochure")) : ""));
-		$main.empty().append(panel(r, "Place an order"));
+		$main.empty().append(card(r));
 		$(cli.item === undefined ? "#demoCliCode" : "#quantity").select().focus();
 	}
 
@@ -293,7 +295,7 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 						tb.append(tr);
 					}
 					t.append(tb);
-					$main.html(panel(t, $("<div/>").append("Your last orders").append($("<div/>", { style: "float: right;" }).addClass("btn glyphicon glyphicon-refresh").click(orders))));
+					$main.html(card(t, $("<div/>").append("Your last orders").append($("<div/>", { style: "float: right;" }).addClass("btn glyphicon glyphicon-refresh").click(orders))));
 				} else {
 					$main.html("");
 					warning("No orders");
@@ -334,7 +336,7 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 						tb.append(tr);
 					}
 					t.append(tb);
-					$main.html(panel(t, $("<div/>").append("Your last messages").append($("<div/>", { style: "float: right;" }).addClass("btn glyphicon glyphicon-refresh").click(messages))));
+					$main.html(card(t, $("<div/>").append("Your last messages").append($("<div/>", { style: "float: right;" }).addClass("btn glyphicon glyphicon-refresh").click(messages))));
 				} else {
 					$main.html("");
 					warning("No messagess");
@@ -394,26 +396,6 @@ var DemoWebSiteBootstrap = typeof DemoWebSiteBootstrap !== "undefined" ? DemoWeb
 				}, { demoOrdCliId: cli.item.row_id, dmin__demoOrdDeliveryDate: dmin, dmax__demoOrdDeliveryDate: dmax, demoOrdStatus: "P;V;D" }, { inlineDocs: false });
 			}
 		});
-	}
-
-	function news() {
-		reset(true);
-		page = "news";
-		app.getNews(function() {
-			$main.empty();
-			if (app.news.length > 0) {
-				for (var i = 0; i < app.news.length; i++) {
-					var n = app.news[i];
-					var nr = row();
-					nr.append($("<div/>").addClass("col-md-1").append($("<img/>", { style: "border: solid 1px grey;", src: "data:" + n.image.mime + ";base64," + n.image.content })));
-					nr.append($("<div/>").addClass("col-md-11").append($("<h3/>").append(n.title)).append(n.content));
-					$main.append(panel(nr, n.date));
-				}
-			} else {
-				$main.html("");
-				warning("No news");
-			}
-		}, { inlineImages: true });
 	}
 
 	return { init: init };

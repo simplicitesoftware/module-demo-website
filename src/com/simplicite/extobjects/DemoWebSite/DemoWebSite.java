@@ -26,25 +26,34 @@ public class DemoWebSite extends ExternalObject {
 
 			// Bootstrap page
 			BootstrapWebPage wp = new BootstrapWebPage(params.getRoot(), getDisplay());
+
 			wp.appendJS("var ROOT = \"" + wp.getRoot() + "\";");
 			wp.appendAjax();
-			wp.appendFullcalendar();
+			//wp.appendFullcalendar();
 			wp.appendJSInclude(HTMLTool.getResourceJSURL(this, "SCRIPT"));
 			wp.setFavicon(HTMLTool.getResourceIconURL(this, "FAVICON"));
 			wp.setReady("DemoWebSiteBootstrap.init(\"" + HTMLTool.getResourceImageURL(this, "LOADING") + "\");");
 
-			LinkedHashMap<String, String> m = new LinkedHashMap<>();
-			m.put("menu-catalog", "Catalog");
-			m.put("menu-orders", "My orders");
-			m.put("menu-messages", "My messages");
-			m.put("menu-agenda", "My deliveries");
-			m.put("menu-news", "News");
-			wp.setMenu("menu-brand", "<img src=\"" + HTMLTool.getResourceImageURL(this, "LOGO") + "\"/>", m, true, false, true);
+			String logo = "<img src=\"" + HTMLTool.getResourceImageURL(this, "LOGO") + "\"/>";
+			wp.append("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\" style=\"margin: 0 4px 8px 4px;\">");
+			wp.append("<a class=\"navbar-brand\" id=\"menu-logo\" href=\"#\">" + logo + "</a>");
+			wp.append("<button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#menu\">");
+    		wp.append("<span class=\"navbar-toggler-icon\"></span>");
+			wp.append("</button>");
+			wp.append("<div class=\"collapse navbar-collapse\" id=\"menu\">");
+			wp.append("<div class=\"navbar-nav\">");
+			wp.append("<a class=\"nav-item nav-link\" id=\"menu-catalog\" href=\"#\">Catalog</a>");
+			wp.append("<a class=\"nav-item nav-link disabled\" id=\"menu-orders\" href=\"#\">My orders</a>");
+			wp.append("<a class=\"nav-item nav-link disabled\" id=\"menu-messages\" href=\"#\">My messages</a>");
+			//wp.append("<a class=\"nav-item nav-link\" id=\"menu-agenda\" href=\"#\">My delivery agenda</a>");
+			wp.append("</div>");
+			wp.append("</div>");
+			wp.append("</nav>");
 
-			wp.appendHTML("<div id=\"header\" class=\"well\" style=\"display: none;\"></div>");
-			wp.appendHTML("<div id=\"info\" class=\"alert alert-success\" style=\"display: none;\"></div>");
-			wp.appendHTML("<div id=\"warning\" class=\"alert alert-warning\" style=\"display: none;\"></div>");
-			wp.appendHTML("<div id=\"error\" class=\"alert alert-danger\" style=\"display: none;\"></div>");
+			wp.appendHTML("<div id=\"header\" class=\"alert alert-primary\" style=\"margin: 4px; display: none;\"></div>");
+			wp.appendHTML("<div id=\"info\" class=\"alert alert-success\" style=\"margin: 4px; display: none;\"></div>");
+			wp.appendHTML("<div id=\"warning\" class=\"alert alert-warning\" style=\"margin: 4px; display: none;\"></div>");
+			wp.appendHTML("<div id=\"error\" class=\"alert alert-danger\" style=\"margin: 4px;display: none;\"></div>");
 			wp.appendHTML("<div id=\"main\"></div>");
 			wp.appendHTML("<div id=\"footer\">&copy; Simplicit&eacute; Software</div>");
 
