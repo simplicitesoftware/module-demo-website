@@ -207,7 +207,7 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 	function order() {
 		reset(true);
 		page = "order";
-		var f = $("<form/>");
+		var f = $("<div/>");
 		var bo = $("<button/>", { id: "button-order" }).addClass("btn").addClass("btn-success").text("Order").attr("disabled", cli.item === undefined).click(function() {
 			reset(false);
 			ord.getForCreate(function() {
