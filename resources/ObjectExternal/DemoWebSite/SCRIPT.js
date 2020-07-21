@@ -102,6 +102,7 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 				ctc.create(function() {
 					$popup.hide();
 					info("Your message has been sent !");
+					setTimeout(messages, 2000);
 				});
 			});
 		});
