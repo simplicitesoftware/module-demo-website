@@ -1,28 +1,29 @@
 var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
-	var app, prd, cli, ord, ctc;
-	var $loading, $main, $info, $warning, $error, $popup;
+	var app, prd, cli, ord, ctc, page;
+	var $loading, $header, $main, $footer, $info, $warning, $error, $popup;
 
-	var page;
-
-	function info(msg) { $info.html(msg).slideDown(); }
+	function info(msg)    { $info.html(msg).slideDown(); }
 	function warning(msg) { $warning.html(msg).slideDown(); }
-	function error(err) { $error.html(app.getErrorMessage(err)).slideDown(); }
+	function error(err)   { $error.html(app.getErrorMessage(err)).slideDown(); }
 
 	function amount(v) { return parseFloat(v).toFixed(2) + " &euro;"; }
-	function date(d) { return new Date(Date.parse(d)).toDateString(); }
+	function date(d)   { return new Date(Date.parse(d)).toDateString(); }
 
-	function init(loading) {
-		$loading = $("<img/>", { src: loading });
+	function render(params) {
+		$loading = $("<img/>", { src: params.loadingImage });
 
-		$("#menu-logo").click(function() { catalog(); });
-		$("#menu-catalog").click(function() { catalog(); });
-		$("#menu-orders").click(function() { orders(); });
-		$("#menu-messages").click(function() { messages(); });
+		$("#demoLogo").append($("<img/>", { src: params.logoImage }).click(catalog));
+		$("#demoCatalogMenu").click(catalog);
+		$("#demoOrdersMenu").click(orders);
+		$("#demoMessagesMenu").click(messages);
 
-		$main = $("#main").html($loading);
-		$info = $("#info");
-		$warning = $("#warning");
-		$error = $("#error");
+		$header = $("#demoHeader");
+		$main = $("#demoMain").html($loading);
+		footer = $("#demoFooter");
+
+		$info = $("#demoInfo");
+		$warning = $("#demoWarning");
+		$error = $("#demoError");
 
 		var t = $("<h4/>").addClass("modal_title");
 		var b = $("<div/>").addClass("modal-body");
@@ -43,7 +44,7 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 		$("body").append(p);
 		$popup = { title: t, body: b, ok: ok, show: function() { p.modal("show"); }, hide: function() { p.modal("hide"); } };
 
-		app = new Simplicite.Ajax(ROOT, "api", "website", "simplicite");
+		app = new Simplicite.Ajax(params.root, "api", "website", "simplicite");
 
 		app.setInfoHandler(info);
 		app.setWarningHandler(warning);
@@ -88,13 +89,13 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 
 	function contact(orderItem) {
 		$popup.title.empty().append("Contact" + (orderItem === undefined ? "" : " on order " + orderItem.demoOrdNumber));
-		$popup.body.empty().append($("<div/>").append("Your message:")).append($("<textarea/>", { id: "message", style: "width: 100%; height: 200px;" }));
+		$popup.body.empty().append($("<div/>").append("Your message:")).append($("<textarea/>", { id: "demoMessage", style: "width: 100%; height: 200px;" }));
 		$popup.ok.click(function() {
 			ctc.getForCreate(function() {
 				ctc.item.demoCtcCliId = cli.item.row_id;
 				ctc.item.demoCtcType = "INF";
 				ctc.item.demoCtcCanal = "WEB";
-				ctc.item.demoCtcComments = "<p>Message from the customer:<blockquote>" + $("#message").val() + "</blockquote></p>&nbsp;";
+				ctc.item.demoCtcComments = "<p>Message from the customer:<blockquote>" + $("#demoMessage").val() + "</blockquote></p>&nbsp;";
 				if (orderItem !== undefined)
 					ctc.item.demoCtcOrdId = orderItem.row_id;
 
@@ -108,12 +109,12 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 	}
 
 	function client() {
-		$("#header").empty().append(row().append($("<div/>").addClass("col-md-4").append(input("demoCliCode", "", "Enter your customer code", function(cc) {
+		$header.empty().append(row().append($("<div/>").addClass("col-md-4").append(input("demoCliCode", "", "Enter your customer code", function(cc) {
 			reset(false);
 			cli.search(function() {
 				if (cli.list.length == 1) {
 					cli.item = cli.list[0];
-					$("#header").empty()
+					$header.empty()
 							.append("You are connected as <strong>" + cli.item.demoCliFirstname + " " + cli.item.demoCliLastname + "</strong>").append("&nbsp;&nbsp;")
 							.append($("<button/>").addClass("btn").addClass("btn-primary").addClass("btn-xs").text("Message").click(function() { contact(); }))
 							.append("&nbsp;&nbsp;")
@@ -122,10 +123,10 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 								if (page != "news") catalog();
 								client();
 							}));
-					$("#menu-orders").removeClass("disabled");
-					$("#menu-messages").removeClass("disabled");
+					$("#demoOrdersMenu").removeClass("disabled");
+					$("#demoMessagesMenu").removeClass("disabled");
 					if (page === "order")
-						$("#button-order").attr("disabled", false);
+						$("#demoOrderButton").attr("disabled", false);
 					else if (page === "orders")
 						orders();
 					else if (page === "messages")
@@ -208,7 +209,7 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 		reset(true);
 		page = "order";
 		var f = $("<div/>");
-		var bo = $("<button/>", { id: "button-order" }).addClass("btn").addClass("btn-success").text("Order").attr("disabled", cli.item === undefined).click(function() {
+		var bo = $("<button/>", { id: "demoOrderButton" }).addClass("btn").addClass("btn-success").text("Order").attr("disabled", cli.item === undefined).click(function() {
 			reset(false);
 			ord.getForCreate(function() {
 				ord.item.demoOrdCliId = cli.item.row_id;
@@ -221,7 +222,7 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 				ord.item.demoOrdPrdId__demoPrdUnitPrice = prd.item.demoPrdUnitPrice;
 				ord.item.demoOrdPrdId__demoPrdStock = prd.item.demoPrdStock;
 				
-				ord.item.demoOrdQuantity = parseInt($("#quantity").val());
+				ord.item.demoOrdQuantity = parseInt($("#demoQuantity").val());
 				ord.item.demoOrdComments = "Order placed on the web site";
 				
 				ord.create(function() {
@@ -231,8 +232,8 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 			});
 		});
 		var bc = $("<button/>", { id: "button-cancel" }).addClass("btn").addClass("btn-danger").text("Cancel").click(function() { catalog(); });
-		f.append(formInput("quantity", "Quantity", 1));
-		f.append(formElement("buttons", undefined, $("<div/>", { style: "text-align: center; padding: 10px;" }).append(bo).append("&nbsp;").append(bc)));
+		f.append(formInput("demoQuantity", "Quantity", 1));
+		f.append(formElement("demoButtons", undefined, $("<div/>", { style: "text-align: center; padding: 10px;" }).append(bo).append("&nbsp;").append(bc)));
 		var r = row();
 		r.append($("<div/>").addClass("col-md-4")
 				//.append($("<img/>", { src: "data:" + prd.item.demoPrdPicture.mime + ";base64," + prd.item.demoPrdPicture.content })).append("<br/>")
@@ -338,11 +339,11 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 					$main.html(card(t, $("<div/>").append("Your last messages").append($("<div/>", { style: "float: right;" }).addClass("btn glyphicon glyphicon-refresh").click(messages))));
 				} else {
 					$main.html("");
-					warning("No messagess");
+					warning("No messages");
 				}
 			}, { demoCtcCliId: cli.item.row_id, demoCtcCanal: "WEB" }, { page: 0 });
 		}
 	}
 
-	return { init: init };
+	return { render: render };
 })(jQuery);
