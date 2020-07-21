@@ -263,7 +263,7 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 		} else {
 			ord.search(function() {
 				if (ord.list.length > 0) {
-					var t = $("<table/>").addClass("table");
+					var t = $("<table/>").addClass("table table-striped");
 					t.append($("<thead/>").append($("<tr/>")
 							.append($("<th/>").text("Number"))
 							.append($("<th/>").text("Date"))
@@ -286,13 +286,13 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 								.append($("<td/>").append($("<button/>").addClass("btn").addClass("btn-primary").addClass("btn-xs").text("Message").data("item", o).click(message_click)));
 						var s = o.demoOrdStatus;
 						if (s === "P")
-							tr.addClass("danger");
+							tr.addClass("table-danger");
 						else if (s === "V")
-							tr.addClass("warning");
+							tr.addClass("table-warning");
 						else if (s === "D")
-							tr.addClass("success");
+							tr.addClass("table-success");
 						else
-							tr.addClass("active");
+							tr.addClass("table-info");
 						tb.append(tr);
 					}
 					t.append(tb);
@@ -314,7 +314,7 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 		} else {
 			ctc.search(function() {
 				if (ctc.list.length > 0) {
-					var t = $("<table/>").addClass("table");
+					var t = $("<table/>").addClass("table table-striped");
 					t.append($("<thead/>").append($("<tr/>")
 							.append($("<th/>").text("Date"))
 							.append($("<th/>").text("Status"))
@@ -329,11 +329,11 @@ var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
 								.append($("<td/>").html(o.demoCtcComments));
 						var s = o.demoCtcStatus;
 						if (s === "O")
-							tr.addClass("danger");
+							tr.addClass("table-danger");
 						else if (s === "P")
-							tr.addClass("warning");
+							tr.addClass("table-warning");
 						else
-							tr.addClass("success");
+							tr.addClass("table-success");
 						tb.append(tr);
 					}
 					t.append(tb);
