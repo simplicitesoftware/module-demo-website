@@ -33,11 +33,11 @@ public class DemoWebSite extends ExternalObject {
 			wp.appendCSSInclude(HTMLTool.getResourceCSSURL(this, "STYLES"));
 			wp.appendHTML(HTMLTool.getResourceHTMLContent(this, "HTML"));
 
-			JSONObject p = params.toJSONObject();
-			p.put("loadingImage", HTMLTool.getResourceImageURL(this, "LOADING"));
-			p.put("logoImage", HTMLTool.getResourceImageURL(this, "LOGO"));
+			JSONObject p = params.toJSONObject()
+				.put("loadingImage", HTMLTool.getResourceImageURL(this, "LOADING"))
+				.put("logoImage", HTMLTool.getResourceImageURL(this, "LOGO"));
 
-			wp.setReady("DemoWebSiteBootstrap.render(" + p.toString() + ");");
+			wp.setReady(this.getName() + ".render(" + p.toString() + ");");
 
 			return wp.toString();
 		} catch (Exception e) {

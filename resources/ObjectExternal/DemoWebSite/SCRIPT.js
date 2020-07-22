@@ -1,4 +1,4 @@
-var DemoWebSiteBootstrap = DemoWebSiteBootstrap || (function($) {
+var DemoWebSite = DemoWebSite || (function($) {
 	var app, prd, cli, ord, ctc, page;
 	var $loading, $header, $main, $footer, $info, $warning, $error, $popup;
 
