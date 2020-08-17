@@ -318,6 +318,7 @@ To import this module:
 		<tsl_id.shc_name>DemoWebSite</tsl_id.shc_name>
 		<tsl_lang>ENU</tsl_lang>
 		<tsl_value>Demo website</tsl_value>
+		<tsl_tooltip><![CDATA[<p>This is a custom web site dedicated to the demo customers</p>]]></tsl_tooltip>
 		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
 	</data>
 	<data>
@@ -325,6 +326,7 @@ To import this module:
 		<tsl_id.shc_name>DemoWebSite</tsl_id.shc_name>
 		<tsl_lang>FRA</tsl_lang>
 		<tsl_value>Site web démo</tsl_value>
+		<tsl_tooltip><![CDATA[<p>Ceci est un site web sp&eacute;cifique d&eacute;di&eacute; aux clients de la d&eacute;mo&nbsp;</p>]]></tsl_tooltip>
 		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
 	</data>
 </object>
