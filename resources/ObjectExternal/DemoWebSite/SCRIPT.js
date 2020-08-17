@@ -1,6 +1,6 @@
 var DemoWebSite = DemoWebSite || (function($) {
 	var app, prd, cli, ord, ctc, page;
-	var $loading, $header, $main, $footer, $info, $warning, $error, $popup;
+	var $loading, $header, $main, $info, $warning, $error, $popup;
 
 	function info(msg)    { $info.html(msg).slideDown(); }
 	function warning(msg) { $warning.html(msg).slideDown(); }
@@ -19,7 +19,7 @@ var DemoWebSite = DemoWebSite || (function($) {
 
 		$header = $("#demoHeader");
 		$main = $("#demoMain").html($loading);
-		$footer = $("#demoFooter").html(params.copyright);
+		$("#demoFooter").html(params.copyright);
 
 		$info = $("#demoInfo");
 		$warning = $("#demoWarning");
