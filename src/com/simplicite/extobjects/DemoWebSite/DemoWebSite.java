@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import com.simplicite.util.AppLog;
 import com.simplicite.util.ExternalObject;
+import com.simplicite.util.Tool;
 import com.simplicite.util.tools.HTMLTool;
 import com.simplicite.util.tools.Parameters;
 import com.simplicite.webapp.web.BootstrapWebPage;
@@ -35,7 +36,8 @@ public class DemoWebSite extends ExternalObject {
 
 			JSONObject p = params.toJSONObject()
 				.put("loadingImage", HTMLTool.getResourceImageURL(this, "LOADING"))
-				.put("logoImage", HTMLTool.getResourceImageURL(this, "LOGO"));
+				.put("logoImage", HTMLTool.getResourceImageURL(this, "LOGO"))
+				.put("copyright", "&copy; " + Tool.getCurrentYear() + " Simplicit&eacute; Software");
 
 			wp.setReady(this.getName() + ".render(" + p.toString() + ");");
 

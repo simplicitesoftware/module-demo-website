@@ -19,7 +19,7 @@ var DemoWebSite = DemoWebSite || (function($) {
 
 		$header = $("#demoHeader");
 		$main = $("#demoMain").html($loading);
-		$footer = $("#demoFooter");
+		$footer = $("#demoFooter").html(params.copyright);
 
 		$info = $("#demoInfo");
 		$warning = $("#demoWarning");
