@@ -39,7 +39,6 @@ To import this module:
 
 - Click on the _Import module_ button
 
-
 `DemoWebSite` external object definition
 ----------------------------------------
 
