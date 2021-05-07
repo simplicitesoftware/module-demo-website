@@ -1,4 +1,4 @@
-var DemoWebSite = DemoWebSite || (function($) {
+var DemoWebSite = (function($) {
 	var app, prd, cli, ord, ctc, page;
 	var $loading, $header, $main, $info, $warning, $error, $popup;
 
