@@ -13,7 +13,7 @@
 		"uri": "https://github.com/simplicitesoftware/module-demo-website.git"
 	}
 }]]></mdl_url>
-		<mdl_lastupd>2020-03-09 22:49:15</mdl_lastupd>
+		<mdl_type>C</mdl_type>
 		<mdl_comment><![CDATA[[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=simplicite-modules-DemoProject&metric=alert_status)](https://sonarcloud.io/dashboard?id=simplicite-modules-DemoProject)
 
 ### Introduction
@@ -158,7 +158,6 @@ To import this module:
 		<res_code>demowebsite-module</res_code>
 		<res_cached>0</res_cached>
 		<res_file/>
-		<res_file_compiled/>
 		<res_image>resources/Disposition/default/demowebsite-module.svg</res_image>
 		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
 	</data>
@@ -176,7 +175,6 @@ To import this module:
 		<res_code>demowebsite-module-screenshot</res_code>
 		<res_cached>0</res_cached>
 		<res_file/>
-		<res_file_compiled/>
 		<res_image>resources/Disposition/default/demowebsite-module-screenshot.png</res_image>
 		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
 	</data>
@@ -194,7 +192,6 @@ To import this module:
 		<res_code>STYLES</res_code>
 		<res_cached>0</res_cached>
 		<res_file>resources/ObjectExternal/DemoWebSite/STYLES.less</res_file>
-		<res_file_compiled>resources/ObjectExternal/DemoWebSite/STYLES.min.css</res_file_compiled>
 		<res_image/>
 		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
 	</data>
@@ -212,7 +209,6 @@ To import this module:
 		<res_code>HTML</res_code>
 		<res_cached>0</res_cached>
 		<res_file>resources/ObjectExternal/DemoWebSite/HTML.html</res_file>
-		<res_file_compiled/>
 		<res_image/>
 		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
 	</data>
@@ -230,7 +226,6 @@ To import this module:
 		<res_code>FAVICON</res_code>
 		<res_cached>0</res_cached>
 		<res_file/>
-		<res_file_compiled/>
 		<res_image>resources/ObjectExternal/DemoWebSite/FAVICON.png</res_image>
 		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
 	</data>
@@ -248,7 +243,6 @@ To import this module:
 		<res_code>LOADING</res_code>
 		<res_cached>0</res_cached>
 		<res_file/>
-		<res_file_compiled/>
 		<res_image>resources/ObjectExternal/DemoWebSite/LOADING.gif</res_image>
 		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
 	</data>
@@ -266,7 +260,6 @@ To import this module:
 		<res_code>LOGO</res_code>
 		<res_cached>0</res_cached>
 		<res_file/>
-		<res_file_compiled/>
 		<res_image>resources/ObjectExternal/DemoWebSite/LOGO.png</res_image>
 		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
 	</data>
@@ -284,7 +277,6 @@ To import this module:
 		<res_code>SCRIPT</res_code>
 		<res_cached>0</res_cached>
 		<res_file>resources/ObjectExternal/DemoWebSite/SCRIPT.js</res_file>
-		<res_file_compiled>resources/ObjectExternal/DemoWebSite/SCRIPT.min.js</res_file_compiled>
 		<res_image/>
 		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
 	</data>
