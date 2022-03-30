@@ -1,6 +1,6 @@
-var DemoWebSite = (function($) {
-	var app, prd, cli, ord, ctc, page;
-	var $loading, $header, $main, $info, $warning, $error, $popup;
+const DemoWebSite = (function($) {
+	let app, prd, cli, ord, ctc, page;
+	let $loading, $header, $main, $info, $warning, $error, $popup;
 
 	function info(msg)    { $info.html(msg).slideDown(); }
 	function warning(msg) { $warning.html(msg).slideDown(); }
@@ -25,10 +25,10 @@ var DemoWebSite = (function($) {
 		$warning = $("#demoWarning");
 		$error = $("#demoError");
 
-		var t = $("<h4/>").addClass("modal_title");
-		var b = $("<div/>").addClass("modal-body");
-		var ok = $("<button/>", { type: "button" }).addClass("btn").addClass("btn-primary").attr("data-dismiss", "modal").append("OK");
-		var p = $("<div/>").addClass("modal").addClass("fade").attr("tabindex", -1).attr("role", "dialog").attr("aria-hidden", true).append(
+		const t = $("<h4/>").addClass("modal_title");
+		const b = $("<div/>").addClass("modal-body");
+		const ok = $("<button/>", { type: "button" }).addClass("btn").addClass("btn-primary").attr("data-dismiss", "modal").append("OK");
+		const p = $("<div/>").addClass("modal").addClass("fade").attr("tabindex", -1).attr("role", "dialog").attr("aria-hidden", true).append(
 			$("<div/>").addClass("modal-dialog").append(
 				$("<div/>").addClass("modal-content").append(
 					$("<div/>").addClass("modal-header").append(
@@ -54,7 +54,7 @@ var DemoWebSite = (function($) {
 	}
 
 	function session() {
-		var token = localStorage ? localStorage.getItem("authtoken") : undefined;
+		const token = localStorage ? localStorage.getItem("authtoken") : undefined;
 		if (token) console.log("Try to reuse auth token: " + token);
 		app.session(function(s) {
 			console.log("Got auth token: " + s.authtoken + " in session: " + s.id);
@@ -148,7 +148,7 @@ var DemoWebSite = (function($) {
 	}
 
 	function card(body, heading, style, span) {
-		var p = $("<div style=\"margin: 4px;\"/>").addClass("card").addClass("bg-" + (style === undefined ? "default" : style));
+		const p = $("<div style=\"margin: 4px;\"/>").addClass("card").addClass("bg-" + (style === undefined ? "default" : style));
 		if (heading)
 			p.append($("<div/>").addClass("card-header").append($("<div/>").addClass("card-title text-center").append(heading)));
 		if (body.is("table"))
@@ -169,18 +169,18 @@ var DemoWebSite = (function($) {
 		page = "catalog";
 		prd.search(function() {
 			$main.empty();
-			var r = row();
-			for (var i = 0; i < prd.list.length; i++) {
+			let r = row();
+			for (let i = 0; i < prd.list.length; i++) {
 				if (i !== 0 && i % 4 === 0) {
 					$main.append(r);
 					r = row();
 				}
-				var item = prd.list[i];
-				var pt = item.demoPrdSupId__demoSupName + " / " + item.demoPrdName;
-				//var pi = $("<img/>", { style: "height: 200px;", title: item.demoPrdReference, src: "data:" + item.demoPrdPicture.mime + ";base64," + item.demoPrdPicture.content }).popover({ content: item.demoPrdDescription });
-				var pi = $("<img/>", { style: "height: 150px;", title: item.demoPrdReference, src: app.imageURL(prd.getName(), "demoPrdPicture", item.row_id, item.demoPrdPicture, false) }).popover({ content: item.demoPrdDescription });
-				var pp = $("<strong/>", { style: "margin-right: 25px;" }).append(amount(item.demoPrdUnitPrice));
-				var b = $("<button/>").addClass("btn").addClass("btn-success").text("Order").data("item", item).click(order_click);
+				const item = prd.list[i];
+				const pt = item.demoPrdSupId__demoSupName + " / " + item.demoPrdName;
+				//const pi = $("<img/>", { style: "height: 200px;", title: item.demoPrdReference, src: "data:" + item.demoPrdPicture.mime + ";base64," + item.demoPrdPicture.content }).popover({ content: item.demoPrdDescription });
+				const pi = $("<img/>", { style: "height: 150px;", title: item.demoPrdReference, src: app.imageURL(prd.getName(), "demoPrdPicture", item.row_id, item.demoPrdPicture, false) }).popover({ content: item.demoPrdDescription });
+				const pp = $("<strong/>", { style: "margin-right: 25px;" }).append(amount(item.demoPrdUnitPrice));
+				const b = $("<button/>").addClass("btn").addClass("btn-success").text("Order").data("item", item).click(order_click);
 				r.append(card($("<div/>").addClass("text-center").append(pi).append("<hr/>").append($("<p/>").addClass("text-right").append(pp).append(b)), pt, "default", 3));
 			}
 			if (r !== undefined) $main.append(r);
@@ -188,7 +188,7 @@ var DemoWebSite = (function($) {
 	}
 
 	function formElement(id, label, content) {
-		var fg =$("<div/>").addClass("form-group");
+		const fg =$("<div/>").addClass("form-group");
 		if (label)
 			fg.append($("<label/>").attr("for", id).append(label));
 		fg.append($("<div/>").append(content));
@@ -196,7 +196,7 @@ var DemoWebSite = (function($) {
 	}
 
 	function input(id, value, placeholder, change) {
-		var i = $("<input/>", { id: id, type: "text", placeholder: placeholder }).addClass("form-control").val(value === undefined ? "" : value);
+		const i = $("<input/>", { id: id, type: "text", placeholder: placeholder }).addClass("form-control").val(value === undefined ? "" : value);
 		if (change !== undefined)
 			i.change(function() { change(i); });
 		return i;
@@ -209,8 +209,8 @@ var DemoWebSite = (function($) {
 	function order() {
 		reset(true);
 		page = "order";
-		var f = $("<div/>");
-		var bo = $("<button/>", { id: "demoOrderButton" }).addClass("btn").addClass("btn-success").text("Order").attr("disabled", cli.item === undefined).click(function() {
+		const f = $("<div/>");
+		const bo = $("<button/>", { id: "demoOrderButton" }).addClass("btn").addClass("btn-success").text("Order").attr("disabled", cli.item === undefined).click(function() {
 			reset(false);
 			ord.getForCreate(function() {
 				ord.item.demoOrdCliId = cli.item.row_id;
@@ -232,10 +232,10 @@ var DemoWebSite = (function($) {
 				});
 			});
 		});
-		var bc = $("<button/>", { id: "button-cancel" }).addClass("btn").addClass("btn-danger").text("Cancel").click(function() { catalog(); });
+		const bc = $("<button/>", { id: "button-cancel" }).addClass("btn").addClass("btn-danger").text("Cancel").click(function() { catalog(); });
 		f.append(formInput("demoQuantity", "Quantity", 1));
 		f.append(formElement("demoButtons", undefined, $("<div/>", { style: "text-align: center; padding: 10px;" }).append(bo).append("&nbsp;").append(bc)));
-		var r = row();
+		let r = row();
 		r.append($("<div/>").addClass("col-md-4")
 				//.append($("<img/>", { src: "data:" + prd.item.demoPrdPicture.mime + ";base64," + prd.item.demoPrdPicture.content })).append("<br/>")
 				.append($("<img/>", { src: app.imageURL(prd.metadata.name, "demoPrdPicture", prd.item.row_id, prd.item.demoPrdPicture, false) })).append("<br/>")
@@ -263,7 +263,7 @@ var DemoWebSite = (function($) {
 		} else {
 			ord.search(function() {
 				if (ord.list.length > 0) {
-					var t = $("<table/>").addClass("table table-striped");
+					const t = $("<table/>").addClass("table table-striped");
 					t.append($("<thead/>").append($("<tr/>")
 							.append($("<th/>").text("Number"))
 							.append($("<th/>").text("Date"))
@@ -273,10 +273,10 @@ var DemoWebSite = (function($) {
 							.append($("<th/>").text("Total"))
 							.append($("<th/>").text("Message"))
 					));
-					var tb = $("<tbody/>");
-					for (var i = 0; i < ord.list.length; i++) {
-						var o = ord.list[i];
-						var tr = $("<tr/>")
+					const tb = $("<tbody/>");
+					for (let i = 0; i < ord.list.length; i++) {
+						const o = ord.list[i];
+						const tr = $("<tr/>")
 								.append($("<td/>").text(o.demoOrdNumber))
 								.append($("<td/>").text(date(o.demoOrdDate)))
 								.append($("<td/>").text(ord.getListValue(ord.getField("demoOrdStatus").listOfValues, o.demoOrdStatus)))
@@ -284,7 +284,7 @@ var DemoWebSite = (function($) {
 								.append($("<td/>").text(o.demoOrdQuantity))
 								.append($("<td/>").html(amount(o.demoOrdTotal)))
 								.append($("<td/>").append($("<button/>").addClass("btn").addClass("btn-primary").addClass("btn-xs").text("Message").data("item", o).click(message_click)));
-						var s = o.demoOrdStatus;
+						const s = o.demoOrdStatus;
 						if (s === "P")
 							tr.addClass("table-danger");
 						else if (s === "V")
@@ -314,20 +314,20 @@ var DemoWebSite = (function($) {
 		} else {
 			ctc.search(function() {
 				if (ctc.list.length > 0) {
-					var t = $("<table/>").addClass("table table-striped");
+					const t = $("<table/>").addClass("table table-striped");
 					t.append($("<thead/>").append($("<tr/>")
 							.append($("<th/>").text("Date"))
 							.append($("<th/>").text("Status"))
 							.append($("<th/>").text("Message"))
 					));
-					var tb = $("<tbody/>");
-					for (var i = 0; i < ctc.list.length; i++) {
-						var o = ctc.list[i];
-						var tr = $("<tr/>")
+					const tb = $("<tbody/>");
+					for (let i = 0; i < ctc.list.length; i++) {
+						const o = ctc.list[i];
+						const tr = $("<tr/>")
 								.append($("<td/>").text(date(o.demoCtcDatetime)))
 								.append($("<td/>").text(ctc.getListValue(ctc.getField("demoCtcStatus").listOfValues, o.demoCtcStatus)))
 								.append($("<td/>").html(o.demoCtcComments));
-						var s = o.demoCtcStatus;
+						const s = o.demoCtcStatus;
 						if (s === "O")
 							tr.addClass("table-danger");
 						else if (s === "P")
