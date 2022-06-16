@@ -93,9 +93,9 @@ const DemoWebSite = (function($) {
 		$popup.ok.click(function() {
 			ctc.getForCreate(function() {
 				ctc.item.demoCtcCliId = cli.item.row_id;
-				ctc.item.demoCtcType = "INF";
+				ctc.item.demoCtcType = "OTH";
 				ctc.item.demoCtcCanal = "WEB";
-				ctc.item.demoCtcComments = "<p>Message from the customer:<blockquote>" + $("#demoMessage").val() + "</blockquote></p>&nbsp;";
+				ctc.item.demoCtcMessages = $("#demoMessage").val();
 				if (orderItem !== undefined)
 					ctc.item.demoCtcOrdId = orderItem.row_id;
 
@@ -326,7 +326,7 @@ const DemoWebSite = (function($) {
 						const tr = $("<tr/>")
 								.append($("<td/>").text(date(o.demoCtcDatetime)))
 								.append($("<td/>").text(ctc.getListValue(ctc.getField("demoCtcStatus").listOfValues, o.demoCtcStatus)))
-								.append($("<td/>").html(o.demoCtcComments));
+								.append($("<td/>").append($("<pre/>").text(o.demoCtcMessages)));
 						const s = o.demoCtcStatus;
 						if (s === "O")
 							tr.addClass("table-danger");
