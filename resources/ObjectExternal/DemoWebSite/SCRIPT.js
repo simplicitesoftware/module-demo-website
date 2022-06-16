@@ -326,7 +326,7 @@ const DemoWebSite = (function($) {
 						const tr = $("<tr/>")
 								.append($("<td/>").text(date(o.demoCtcDatetime)))
 								.append($("<td/>").text(ctc.getListValue(ctc.getField("demoCtcStatus").listOfValues, o.demoCtcStatus)))
-								.append($("<td/>").append($("<pre/>").text(o.demoCtcMessages)));
+								.append($("<td/>").css("white-space", "break-spaces").addClass("small").text(o.demoCtcMessages));
 						const s = o.demoCtcStatus;
 						if (s === "O")
 							tr.addClass("table-danger");
