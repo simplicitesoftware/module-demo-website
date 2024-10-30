@@ -62,7 +62,7 @@ To import this module:
 		<shc_order>130</shc_order>
 		<shc_visible>P;H</shc_visible>
 		<shc_icon>fas/globe</shc_icon>
-		<shc_keys>Alt+W</shc_keys>
+		<shc_keys/>
 		<row_module_id.mdl_name>DemoWebSite</row_module_id.mdl_name>
 	</data>
 </object>
